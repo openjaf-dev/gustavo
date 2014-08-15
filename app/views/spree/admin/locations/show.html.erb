@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @location.address %>
+</p>
+
+<p>
+  <strong>Location name:</strong>
+  <%= @location.location_name %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @location.phone_number %>
+</p>
+
+<p>
+  <strong>Distric:</strong>
+  <%= @location.district %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @location.city %>
+</p>
+
+<p>
+  <strong>Postcode:</strong>
+  <%= @location.postcode %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @location.country %>
+</p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @location.lat %>
+</p>
+
+<p>
+  <strong>Lng:</strong>
+  <%= @location.lng %>
+</p>
+
+<p>
+  <strong>Enabled:</strong>
+  <%= @location.enabled %>
+</p>
+
+<%= link_to 'Edit', "/admin/locations/#{@location.id}/edit" %> |
+<%= link_to 'Back', '/admin/locations' %>
+
+
+  <%= render :partial => "googlemap_show" %>
