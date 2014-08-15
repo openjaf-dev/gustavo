@@ -38,3 +38,18 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+
+gem 'therubyracer'
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  #gem 'debugger'
+end
+
+gem 'money', '6.0.1'
+
+gem 'spree', '2.3.1'
+gem 'spree_auth_devise', :path => '/home/raul/RubymineProjects/github/spree_auth_devise', :branch => '2-3-stable'
+
+
