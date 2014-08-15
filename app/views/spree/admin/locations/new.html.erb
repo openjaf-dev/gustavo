@@ -1,0 +1,26 @@
+<h1>New spree_admin_location</h1>
+
+<% content_for :table_filter_title do %>
+  <%= Spree.t(:Search_For_Address) %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_products_sidebar">
+
+  <div class="alpha sixteen	 columns">
+    <div class="field">
+      <%= text_field_tag :location_search, nil, class: "", type: "text" , :style=>"margin-bottom: 10px;" %>
+    </div>
+  </div>
+
+  <div class="form-buttons actions filter-actions" data-hook="admin_products_index_search_buttons">
+    <%= button Spree.t(:search), 'search' %>
+  </div>
+
+  </div>
+<% end %>
+
+
+<%= render 'form' %>
+
+<%= link_to 'Back', '/admin/locations' %>
