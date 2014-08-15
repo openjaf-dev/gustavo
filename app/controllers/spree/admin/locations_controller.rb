@@ -28,7 +28,7 @@ class Spree::Admin::LocationsController < Spree::Admin::ResourceController
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
+        format.html { redirect_to '/admin/locations', notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Spree::Admin::LocationsController < Spree::Admin::ResourceController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to @location, notice: 'Location was successfully updated.' }
+        format.html { redirect_to '/admin/locations', notice: 'Location was successfully updated.' }
         format.json { render :show, status: :ok, location: @location }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Spree::Admin::LocationsController < Spree::Admin::ResourceController
   def destroy
     @location.destroy
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to '/admin/locations', notice: 'Location was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,7 @@ class Spree::Admin::LocationsController < Spree::Admin::ResourceController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:address, :location_name, :phone_number, :distric, :city, :postcode, :country, :lat, :lng, :reference, :enabled)
+      params.require(:location).permit(:address, :location_name, :phone_number, :district,
+        :city, :postcode, :country, :lat, :lng, :reference, :enabled)
     end
 end

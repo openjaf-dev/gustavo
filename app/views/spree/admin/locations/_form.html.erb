@@ -1,3 +1,4 @@
+<div class="seven columns ">
 <%= form_for @location, url: '/admin/locations', html: { method: :post } do |f| %>
   <% if @location.errors.any? %>
     <div id="error_explanation">
@@ -24,8 +25,8 @@
     <%= f.text_field :phone_number %>
   </div>
   <div class="field">
-    <%= f.label :distric %><br>
-    <%= f.text_field :distric %>
+    <%= f.label :district %><br>
+    <%= f.text_field :district %>
   </div>
   <div class="field">
     <%= f.label :city %><br>
@@ -47,10 +48,7 @@
     <%= f.label :lng %><br>
     <%= f.text_field :lng %>
   </div>
-  <div class="field">
-    <%= f.label :reference %><br>
-    <%= f.text_field :reference %>
-  </div>
+  <%= f.hidden_field :reference %>
   <div class="field">
     <%= f.label :enabled %><br>
     <%= f.check_box :enabled %>
@@ -59,3 +57,8 @@
     <%= f.submit %>
   </div>
 <% end %>
+</div>
+<div class='seven columns'>
+  <%= render partial: "googlemap" %>
+</div>
+

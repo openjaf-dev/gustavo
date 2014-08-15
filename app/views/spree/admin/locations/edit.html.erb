@@ -1,6 +1,8 @@
 <h1>Editing spree_admin_location</h1>
 
-<%= render 'form' %>
+<%= form_for @location, url: "/admin/locations/#{@location.id}", html: { method: :put } do |f| %>
+	<%= render 'form' %>
+<%end%>
 
-<%= link_to 'Show', @spree_admin_location %> |
-<%= link_to 'Back', spree_admin_locations_path %>
+<%= link_to 'Show', "/admin/locations/#{@location.id}" %> |
+<%= link_to 'Back', '/admin/locations' %>

@@ -2,58 +2,56 @@
 
 <p>
   <strong>Address:</strong>
-  <%= @spree_admin_location.address %>
+  <%= @location.address %>
 </p>
 
 <p>
   <strong>Location name:</strong>
-  <%= @spree_admin_location.location_name %>
+  <%= @location.location_name %>
 </p>
 
 <p>
   <strong>Phone number:</strong>
-  <%= @spree_admin_location.phone_number %>
+  <%= @location.phone_number %>
 </p>
 
 <p>
   <strong>Distric:</strong>
-  <%= @spree_admin_location.distric %>
+  <%= @location.district %>
 </p>
 
 <p>
   <strong>City:</strong>
-  <%= @spree_admin_location.city %>
+  <%= @location.city %>
 </p>
 
 <p>
   <strong>Postcode:</strong>
-  <%= @spree_admin_location.postcode %>
+  <%= @location.postcode %>
 </p>
 
 <p>
   <strong>Country:</strong>
-  <%= @spree_admin_location.country %>
+  <%= @location.country %>
 </p>
 
 <p>
   <strong>Lat:</strong>
-  <%= @spree_admin_location.lat %>
+  <%= @location.lat %>
 </p>
 
 <p>
   <strong>Lng:</strong>
-  <%= @spree_admin_location.lng %>
-</p>
-
-<p>
-  <strong>Reference:</strong>
-  <%= @spree_admin_location.reference %>
+  <%= @location.lng %>
 </p>
 
 <p>
   <strong>Enabled:</strong>
-  <%= @spree_admin_location.enabled %>
+  <%= @location.enabled %>
 </p>
 
-<%= link_to 'Edit', edit_spree_admin_location_path(@spree_admin_location) %> |
-<%= link_to 'Back', spree_admin_locations_path %>
+<%= link_to 'Edit', "/admin/locations/#{@location.id}/edit" %> |
+<%= link_to 'Back', '/admin/locations' %>
+
+
+  <%= render :partial => "googlemap_show" %>

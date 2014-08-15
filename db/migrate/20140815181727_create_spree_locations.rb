@@ -4,7 +4,7 @@ class CreateSpreeLocations < ActiveRecord::Migration
       t.string :address
       t.string :location_name
       t.string :phone_number
-      t.string :distric
+      t.string :district
       t.string :city
       t.string :postcode
       t.string :country
