@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :locations
     end
+    resources :hotels
   end
 
   # This line mounts Spree's routes at the root of your application.
