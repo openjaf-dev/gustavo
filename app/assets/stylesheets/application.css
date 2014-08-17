@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+ .pac-container:after{
+ 	content:none !important;
+	}
