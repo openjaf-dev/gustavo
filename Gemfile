@@ -38,7 +38,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-
+gem 'expedia', :path => '/home/raul/RubymineProjects/github/expedia'
 gem 'therubyracer'
 
 group :development do
