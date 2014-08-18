@@ -1,2 +1,36 @@
-jl;kjkljkljkl
-<%= @hotel_info['name']%>
+Name</br>
+
+<%= @hotel_summary['name']%>
+
+</br>
+</br>
+</br>
+
+          <div id="cart-form" data-hook="cart_form">
+            <%#= render :partial => 'cart_form' %>
+          </div>
+
+
+</br>
+</br>
+</br>
+
+locationDescription</br>
+<%= @hotel_detail['locationDescription']%>
+
+</br>
+</br>
+
+<% @availability.first.each do |r|%>
+
+<%= r['rateDescription'] %></br>
+<%#= r['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] %></br>
+          <div id="cart-form" data-hook="cart_form">
+            <%= render :partial => 'cart_form', :locals => { :r => r }%>
+          </div>
+
+<% end %>
+
+
+</br>
+</br>

@@ -36,9 +36,27 @@ class Spree::HotelsController < Spree::StoreController
   end
 
   def show
-  	ean_response = $api.get_information( :hotelId => params[:id] )
-  	data = ean_response.body
-  	@hotel_info = data['HotelInformationResponse']['HotelSummary']
+  	ean_hotel_info = $api.get_information( :hotelId => params[:id] )
+  	data = ean_hotel_info.body
+  	@hotel_summary   = data['HotelInformationResponse']['HotelSummary']
+    @hotel_detail    = data['HotelInformationResponse']['HotelDetails']
+    @room_types      = data['HotelInformationResponse']['RoomTypes']
+    @hotel_images    = data['HotelInformationResponse']['HotelImages']['HotelImage']
+
+    @availability = []
+    @room_types['RoomType'].each do |rt|
+
+      ean_availability = $api.get_availability( :hotelId => @hotel_summary['hotelId'],
+                                          :arrivaldate => '9/17/2014', :departuredate=> '9/19/2014',
+                                          :numberofadults => '2', :roomcodetype => rt['@roomCode'] )
+      data = ean_availability.body
+      @availability << data['HotelRoomAvailabilityResponse']['HotelRoomResponse']
+
+    end
+
+
+
+
   end
 
 end
