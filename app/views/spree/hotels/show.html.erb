@@ -1,2 +1,29 @@
-jl;kjkljkljkl
-<%= @hotel_info['name']%>
+Name</br>
+
+<%= @hotel_summary['name']%>
+
+</br>
+</br>
+</br>
+
+locationDescription</br>
+<%= @hotel_detail['locationDescription']%>
+
+</br>
+</br>
+
+<% @room_types.each do |r|%>
+
+<%= r['description'] %></br>
+
+<% end %>
+
+</br>
+</br>
+
+<% @hotel_images.each do |i|%>
+
+  <%= image_tag i['url'], :itemprop => 'image'  %></br>
+
+<% end %>
+
