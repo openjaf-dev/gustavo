@@ -1,0 +1,28 @@
+<%= form_for :order, :url => populate_orders_path do |f| %>
+  <div id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+
+
+    <%# if @product.price_in(current_currency) and !@prodct.price.nil? %>
+      <div data-hook="product_price" class="columns five">
+
+        <div id="product-price">
+          <h6 class="product-section-title"><%= Spree.t(:price) %></h6>
+          <div>
+            <span class="price selling" itemprop="price">
+              <%= r['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] %>
+            </span>
+            <span itemprop="priceCurrency" content="<%= r['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'] %>"></span>
+          </div>
+
+        </div>
+
+        <div class="add-to-cart">
+          <%= number_field_tag :quantity, 1, :class => 'title', :min => 1 %>
+          <%= button_tag :class => 'large primary', :id => 'add-to-cart-button', :type => :submit do %>
+            <%= Spree.t(:add_to_cart) %>
+          <% end %>
+        </div>
+      </div>
+    <%# end %>
+  </div>
+<% end %>
