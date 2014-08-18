@@ -1,13 +1,4 @@
-<%
-  paginated_products = @searcher.retrieve_products if params.key?(:keywords)
-  paginated_hotels ||= hotels
-%>
-
-<% content_for :head do %>
-  <% if paginated_hotels.respond_to?(:num_pages) %>
-    <%= rel_next_prev_link_tags paginated_hotels %>
-  <% end %>
-<% end %>
+<%  paginated_hotels ||= hotels %>
 
 <div data-hook="products_search_results_heading">
   <% if hotels.empty? %>
@@ -20,19 +11,38 @@
 <% if hotels.any? %>
 <ul id="products" class="inline product-listing" data-hook>
   <% hotels[1..100].each do |hotel| %>
-    <%# url = product_url(hotel, :taxon_id => @taxon.try(:id)) %>
-    <li id="product_<%#= product.id %>" class="columns three <%= cycle("alpha", "secondary", "", "omega secondary", :name => "classes") %>" data-hook="products_list_item" itemscope itemtype="http://schema.org/Product">
-      <%# cache(@taxon.present? ? [I18n.locale, current_currency, @taxon, product] : [I18n.locale, current_currency, product]) do %>
-        <div class="product-image">
-          <%= image_tag show_image(hotel['thumbNailUrl']), :itemprop => "image" %>
-        </div>
-        <%=  link_to hotel['name'], "/hotels/#{hotel['hotelId']}", :class => 'info', :itemprop => "name", :title => hotel['name'] %>
-        <%= hotel['countryCode'] %>
-        <span class="price selling" itemprop="price"><%#= display_price(hotel) %></span>
+
+  <li id="product_#{hotel['hotelId']}" class="columns twelve secundary alpha omega"   onclick="" data-hook="products_list_item" itemscope itemtype="http://schema.org/Product">
+  <div class="product-image">
+    <%= image_tag show_image(hotel['thumbNailUrl']), :itemprop => 'image' %>
+  </div>
+  <div class="product-title">
+    <%=  link_to "/hotels/#{hotel['hotelId']}", :class => 'info', :itemprop => "name", :title => hotel['name'] do %>
+      <%= hotel['name'] %>
+      <span class=<%= "stars-" + hotel['hotelRating'].to_s %> ></span>
+    <% end %>
+  </div>
+  <div class="product-mini-description">
+    <%= raw(hotel['shortDescription']) %>
+  </div>
+  <div id="cart-form" data-hook="cart_form">
+    <%#= render :partial => 'cart_form', :locals => {:product => product} %>
+  </div>
+</li>
+
+
+
+    <!-- <li id="product_#{hotel['hotelId']}" class="columns twelve secundary alpha omega" data-hook="products_list_item" itemscope itemtype="http://schema.org/Product"> -->
+        <!-- <div class="product-image"> -->
+          <%#= image_tag show_image(hotel['thumbNailUrl']), :itemprop => "image" %>
+        <!-- </div> -->
+        <%#=  link_to hotel['name'], "/hotels/#{hotel['hotelId']}", :class => 'info', :itemprop => "name", :title => hotel['name'] %>
+        <%#= hotel['countryCode'] %>
+        <!-- <span class="price selling" itemprop="price"><%#= display_price(hotel) %></span> -->
       <%# end %>
-    </li>
+    <!-- </li> -->
   <% end %>
-  <% reset_cycle("classes") %>
+
 </ul>
 <% end %>
 

@@ -1,0 +1,85 @@
+.pac-container:after{
+	content:none !important;
+}
+
+ul#products li {
+	text-align: left;
+}
+
+.product-image {
+    max-width: 120px;
+    float: left;
+    margin-right: 10px;
+}
+
+ul#products li a.info {
+    overflow: hidden;
+    border-bottom: 0;
+    font-size: 14px;
+    color: black;
+    height: 20px
+}
+
+ul#products li a.info:hover {
+  color: #00adee;
+}
+
+ul#products li .product-mini-description {
+    color: #bbbbbb;
+    font-weight: normal;
+}
+
+ul#products li .product-image {
+    border: 0;
+}
+
+.product-item {
+   border: 1px solid #d9d9db;
+}
+
+.product-item:hover {
+    border: 1px solid #1D95CB;
+}
+
+
+/*hotel stars*/
+
+span.stars-1{
+    background-image: url('stars.png');
+    background-position: 0px 20px;
+    width: 73px;
+    height: 16px;
+    float: left;
+}
+
+span.stars-2{
+    background-image: url('stars.png');
+    background-position: 0px 33px;
+    width: 73px;
+    height: 15px;
+    float: left;
+}
+
+span.stars-3{
+    background-image: url('stars.png');
+    background-position: 0px 46px;
+    width: 73px;
+    height: 15px;
+    float: left;
+}
+
+span.stars-4{
+    background-image: url('stars.png');
+    background-position: 0px 59px;
+    width: 73px;
+    height: 15px;
+    float: left;
+}
+
+span.stars-5{
+    background-image: url('stars.png');
+    background-position: 0px 0px;
+    width: 73px;
+    height: 16px;
+    float: left;
+}
