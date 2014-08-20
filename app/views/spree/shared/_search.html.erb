@@ -1,0 +1,9 @@
+<%= form_tag '/hotels', :method => :get do %>
+  <%= search_field_tag :location_search, params[:location_search]%>
+  <%= hidden_field_tag :location_lat%>
+  <%= hidden_field_tag :location_lng%>
+  <%= submit_tag Spree.t(:search), :name => nil %>
+<% end %>
+
+  <%= render partial: "spree/shared/googlemap" %>
+
