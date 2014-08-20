@@ -38,7 +38,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'expedia', :git => 'zaidakram/expedia'
+gem 'expedia', :github => 'zaidakram/expedia'
 gem 'therubyracer'
 
 group :development do
@@ -50,6 +50,6 @@ end
 gem 'money', '6.0.1'
 
 gem 'spree', '2.3.1'
-gem 'spree_auth_devise', :git => 'spree/spree_auth_devise', :branch => '2-3-stable'
+gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '2-3-stable'
 
 
