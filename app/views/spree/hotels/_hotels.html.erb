@@ -1,0 +1,51 @@
+<%  paginated_hotels ||= hotels %>
+
+<div data-hook="products_search_results_heading">
+  <% if hotels.empty? %>
+    <div data-hook="products_search_results_heading_no_results_found">
+      <%= Spree.t(:no_hotels_found) %>
+    </div>
+  <% end %>
+</div>
+
+<% if hotels.any? %>
+<ul id="products" class="inline product-listing" data-hook>
+  <% hotels[1..100].each do |hotel| %>
+
+  <li id="product_#{hotel['hotelId']}" class="columns twelve secundary alpha omega"   onclick="" data-hook="products_list_item" itemscope itemtype="http://schema.org/Product">
+  <div class="product-image">
+    <%= image_tag show_image(hotel['thumbNailUrl']), :itemprop => 'image' %>
+  </div>
+  <div class="product-title">
+    <%=  link_to "/hotels/#{hotel['hotelId']}", :class => 'info', :itemprop => "name", :title => hotel['name'] do %>
+      <%= hotel['name'] %>
+      <span class=<%= "stars-" + hotel['hotelRating'].to_s %> ></span>
+    <% end %>
+  </div>
+  <div class="product-mini-description">
+    <%= raw(hotel['shortDescription']) %>
+  </div>
+  <div id="cart-form" data-hook="cart_form">
+    <%#= render :partial => 'cart_form', :locals => {:product => product} %>
+  </div>
+</li>
+
+
+
+    <!-- <li id="product_#{hotel['hotelId']}" class="columns twelve secundary alpha omega" data-hook="products_list_item" itemscope itemtype="http://schema.org/Product"> -->
+        <!-- <div class="product-image"> -->
+          <%#= image_tag show_image(hotel['thumbNailUrl']), :itemprop => "image" %>
+        <!-- </div> -->
+        <%#=  link_to hotel['name'], "/hotels/#{hotel['hotelId']}", :class => 'info', :itemprop => "name", :title => hotel['name'] %>
+        <%#= hotel['countryCode'] %>
+        <!-- <span class="price selling" itemprop="price"><%#= display_price(hotel) %></span> -->
+      <%# end %>
+    <!-- </li> -->
+  <% end %>
+
+</ul>
+<% end %>
+
+<% if paginated_hotels.respond_to?(:num_pages) %>
+  <%= paginate paginated_hotels %>
+<% end %>
