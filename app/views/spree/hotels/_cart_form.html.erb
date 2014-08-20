@@ -1,6 +1,14 @@
 <%= form_for :order, :url => populate_orders_path do |f| %>
   <div id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
+        <%= hidden_field_tag "hotelId", @hotel_summary['hotelId']  %>
+        <%= hidden_field_tag "arrivalDate", "9/17/2014"  %>
+        <%= hidden_field_tag "departureDate", "9/19/2014" %>
+        <%= hidden_field_tag "rateKey", r['RateInfos']['RateInfo']['RoomGroup']['Room']['rateKey']  %>
+        <%= hidden_field_tag "roomTypeCode", r['roomTypeCode']  %>
+        <%= hidden_field_tag "rateCode",  r['rateCode'] %>
+        <%= hidden_field_tag "chargeableRate", r['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] %>
+        <%= hidden_field_tag "numberOfAdults", r['rateOccupancyPerRoom'] %>
 
     <%# if @product.price_in(current_currency) and !@prodct.price.nil? %>
       <div data-hook="product_price" class="columns five">
