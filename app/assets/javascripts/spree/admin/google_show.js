@@ -12,16 +12,16 @@ var defaultZoom = 17; // Why zoomed in? Because it looks good.
     center: new google.maps.LatLng(lat, lng),
     zoom: defaultZoom,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
-    scrollwheel: true,
-    scaleControl: true
+    scrollwheel: false,
+    scaleControl: false
   };
   var map = new google.maps.Map(document.getElementById('map'),mapOptions);
 
   // Im Centering the map in Bangkok
   // '13.731547730050778'
   // '100.56798934936523'
-  var mylat = document.getElementById("location_lat").value;
-  var mylng = document.getElementById("location_lng").value;
+  // var mylat = document.getElementById("location_lat").value;
+  // var mylng = document.getElementById("location_lng").value;
   if (jQuery.isEmptyObject(mylat)) {
     var mylat = lat;
     var mylng = lng;
