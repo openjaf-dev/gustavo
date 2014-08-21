@@ -10,7 +10,7 @@
     
 })();*/
 
-
+$( document ).ready(function() {
 
  var defaultZoom = 16; // Why zoomed in? Because it looks good.
 
@@ -182,5 +182,7 @@
       marker.setAnimation(google.maps.Animation.BOUNCE);
     }
   };
+  
+  });
   
  
