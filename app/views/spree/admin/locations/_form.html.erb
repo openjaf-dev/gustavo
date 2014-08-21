@@ -1,18 +1,12 @@
 
-<div class='seven columns'>
-  <%#= render partial: "googlemap" %>
-</div>
-
+<%#= render partial: "googlemap" %>
+<div id="googlemap" style="width: 100%; height: 360px"></div>
 <% content_for :head do %>
         <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places" %>
         <%= javascript_include_tag 'spree/admin/google' %>
 <% end %>
 
 
-
-
-
-<div class="seven columns ">
 <%= form_for @location, url: '/admin/locations', html: { method: :post } do |f| %>
   <% if @location.errors.any? %>
     <div id="error_explanation">
@@ -25,7 +19,7 @@
       </ul>
     </div>
   <% end %>
-
+<div class="eight columns omega">
   <div class="field">
     <%= f.label :address %><br>
     <%= f.text_field :address %>
@@ -46,6 +40,8 @@
     <%= f.label :city %><br>
     <%= f.text_field :city %>
   </div>
+</div>
+<div class="eight columns alpha">  
   <div class="field">
     <%= f.label :postcode %><br>
     <%= f.text_field :postcode %>
@@ -70,6 +66,10 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+</div>    
 <% end %>
 </div>
+
+
+
 

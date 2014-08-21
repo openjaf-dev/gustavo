@@ -1,9 +1,13 @@
-<div id="googlemap"></div>
+<!-- <div id="googlemap"></div> -->
+<div id="googlemap" style="width: 100%; height: 360px"></div>
 
 <script src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places" type="text/javascript"></script>
 
 <script type="text/javascript">
 <!--
+$( document ).ready(function() {
+
+
   var defaultZoom = 16; // Why zoomed in? Because it looks good.
 
   // create map and add controls
@@ -21,7 +25,7 @@
 	// '100.56798934936523'
 	var mylat = document.getElementById("location_lat").value;
 	var mylng = document.getElementById("location_lng").value;
-	if (jQuery.isEmptyObject(mylat)) {
+	if (jQuery.isEmptyObject(mylat)|| typeof mylat === 'undefined') {
 	  var mylat = '13.731548';
 	  var mylng = '100.56799';
 	  var defaultZoom = 14;
@@ -174,6 +178,8 @@
       marker.setAnimation(google.maps.Animation.BOUNCE);
     }
   };
+
+  });
 
 //-->
 </script>
