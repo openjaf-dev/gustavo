@@ -1,3 +1,17 @@
+
+<div class='seven columns'>
+  <%#= render partial: "googlemap" %>
+</div>
+
+<% content_for :head do %>
+        <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places" %>
+        <%= javascript_include_tag 'spree/admin/google' %>
+<% end %>
+
+
+
+
+
 <div class="seven columns ">
 <%= form_for @location, url: '/admin/locations', html: { method: :post } do |f| %>
   <% if @location.errors.any? %>
@@ -57,8 +71,5 @@
     <%= f.submit %>
   </div>
 <% end %>
-</div>
-<div class='seven columns'>
-  <%= render partial: "googlemap" %>
 </div>
 
