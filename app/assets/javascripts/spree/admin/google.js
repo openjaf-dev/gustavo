@@ -1,15 +1,4 @@
 
-
-/*javascript: (function() {    
-    
-    var ga = document.createElement('script');
-    ga.type = 'text/javascript';
-    ga.src = 'http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places&callback=initialize';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-    
-})();*/
-
 $( document ).ready(function() {
 
  var defaultZoom = 16; // Why zoomed in? Because it looks good.
@@ -19,8 +8,8 @@ $( document ).ready(function() {
     center: new google.maps.LatLng(13.731547730050778, 100.56798934936523),
     zoom: defaultZoom,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
-    scrollwheel: false,
-    scaleControl: false
+    scrollwheel: true,
+    scaleControl: true
   };
   var map = new google.maps.Map(document.getElementById('googlemap'),mapOptions);
 
@@ -182,7 +171,7 @@ $( document ).ready(function() {
       marker.setAnimation(google.maps.Animation.BOUNCE);
     }
   };
-  
+
   });
-  
- 
+
+
