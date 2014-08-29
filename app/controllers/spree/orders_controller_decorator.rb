@@ -45,4 +45,14 @@ Spree::OrdersController.class_eval do
       end
     end
 
+  private
+
+      def order_params
+        if params[:order]
+          params[:order].permit(*permitted_order_attributes,  pax_contacts_attributes: [:first_name, :phone])
+        else
+          {}
+        end
+      end
+
 end

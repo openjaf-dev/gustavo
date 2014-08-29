@@ -1,0 +1,36 @@
+
+  <%# number_pax = 0
+     dict = {}
+     @order.line_items.each do |li|
+       cant_pax = li.quantity
+       cant_pax.times { dict[number_pax += 1] = li.product.name }
+     end
+     number_pax = 1
+  %>
+
+
+<%= form.fields_for :pax_contacts do |pax| %>
+  <div class="columns six  <%= cycle('', ' alpha omega') %>" data-hook="billing_fieldset_wrapper">
+    <fieldset id="billing" data-hook>
+      <legend align="left"><%= Spree.t(:room) %></legend>
+      <p class="columns alpha four field" id="bfirstname">
+        <%= pax.label :first_name, t('first_name') %><span class="req">*</span><br />
+        <%= pax.text_field :first_name, :class => 'required' %>
+      </p>
+      <p class="columns omega four field" id="blastname">
+        <%= pax.label :phone, t('phone') %><span class="req">*</span><br />
+        <%= pax.text_field :phone, :class => 'required' %>
+      </p>
+    </fieldset>  
+  </div>
+<% end %>
+
+
+
+
+<div id="cart-sac-button" class="columns omega four" data-hook="buttons">
+  <ul class="button-checkout-right padding-button-2">
+        <li id="text-checkout"><%= submit_tag t('save_and_continue'), :id => 'sac-button' %>
+        </li>
+  </ul>
+</div>

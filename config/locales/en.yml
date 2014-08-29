@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+  save_and_continue: save and continue
+  spree:
+    order_state:
+      pax: Pax

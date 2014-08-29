@@ -1,0 +1,22 @@
+<ul id="search_box_tabs" class="nav nav-tabs">
+    <%= content_tag :li, class: "active" do %>
+      <a data-toggle="tab" href=#hotel class="active"%> Hotel </a>
+    <% end %>
+</ul>
+
+<div id="tabcontent" class="tab-content">
+    <% prefix = "hotel_" %>
+    <div id=<%="#{prefix}fields"%> class="tab-pane fade active in" >
+      <ul class="alpha twelve columns omega" >
+		  <%= search_field_tag :location_search, params[:location_search], :class => "alpha eleven columns"%>
+		  <%= hidden_field_tag :location_lat %>
+		  <%= hidden_field_tag :location_lng%>
+		  <%= text_field_tag :arrivalDate, (Time.now).strftime("%m-%d-%Y"), :class => 'datepicker' %>
+		  <%= text_field_tag :departureDate, (Time.now + 3.days).strftime("%m-%d-%Y"), :class => 'datepicker'  %>
+		  <%= select_tag :rooms, options_for_select([["1", "1"], ["2", "2"], ["3", "3"]]) %>
+      </ul>
+    </div>
+</div>
+
+
+  <%= render partial: "spree/shared/googlemap" %>

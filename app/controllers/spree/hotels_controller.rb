@@ -3,12 +3,30 @@ class Spree::HotelsController < Spree::StoreController
   def index
   	@taxonomies = Spree::Taxonomy.includes(root: :children)
 
+
+    # if params[:rooms]
+
+    #   hash = {}
+    #   hash = :RoomGroup => ''
+
+    # end
+    # hash = {}
+    # hash = :RoomGroup => { :Room => { :numberOfAdults => '2'} }
+
+    # <RoomGroup>
+    #     <Room>
+    #         <numberOfAdults>2</numberOfAdults>
+    #     </Room>
+    # </RoomGroup>
+
   	if params[:location_lat] && params[:location_lng]
 	  	ean_response = $api.get_list( :latitude => params[:location_lat],
-	  								 :longitude => params[:location_lng] )
-	else
-		ean_response = $api.get_list( :destinationString => params[:location_search] )
-	end
+	  								                :longitude => params[:location_lng],
+                                    :arrivalDate => params[:arrivalDate],
+                                    :departureDate => params[:departureDate]  )
+	  else
+		  ean_response = $api.get_list( :destinationString => params[:location_search] )
+	  end
 
 # 	if ean_response.category
 # 		response = ean_response.category
