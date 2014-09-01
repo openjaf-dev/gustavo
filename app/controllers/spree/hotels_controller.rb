@@ -4,14 +4,14 @@ class Spree::HotelsController < Spree::StoreController
   	@taxonomies = Spree::Taxonomy.includes(root: :children)
 
 
+    # hash = {}
     # if params[:rooms]
-
-    #   hash = {}
-    #   hash = :RoomGroup => ''
+    #   hash[:RoomGroup] = ''
+    #   3.times.each do
+    #    hash[:RoomGroup] = {:Room => { :numberOfAdults => '2'}}
+    #   end
 
     # end
-    # hash = {}
-    # hash = :RoomGroup => { :Room => { :numberOfAdults => '2'} }
 
     # <RoomGroup>
     #     <Room>
@@ -19,13 +19,33 @@ class Spree::HotelsController < Spree::StoreController
     #     </Room>
     # </RoomGroup>
 
-  	if params[:location_lat] && params[:location_lng]
-	  	ean_response = $api.get_list( :latitude => params[:location_lat],
+  	if (params[:location_lat] != "") && (params[:location_lng] != "")
+	  	      ean_response = $api.get_list( :latitude => params[:location_lat],
 	  								                :longitude => params[:location_lng],
                                     :arrivalDate => params[:arrivalDate],
-                                    :departureDate => params[:departureDate]  )
+                                    :departureDate => params[:departureDate],
+                                    :roomGroup => {:room => { :numberOfAdults => 2 }}  )
+            if ean_response.class == Expedia::APIError
+                flash.notice = ean_response.presentation_message
+                redirect_to root_path
+            else
+              data = ean_response.body
+              @hotel_list = data['HotelListResponse']['HotelList']['HotelSummary']
+            end
+    elsif (params[:location_lat] == "") && (params[:location_lng] == "")
+            ean_response = $api.get_list( :destinationString => params[:location_search],
+                                    :arrivalDate => params[:arrivalDate],
+                                    :departureDate => params[:departureDate],
+                                    :roomGroup => {:room => { :numberOfAdults => 2 }}  )
+            if ean_response.class == Expedia::APIError
+                flash.notice = ean_response.presentation_message
+                redirect_to root_path
+            else
+              data = ean_response.body
+              @hotel_list = data['HotelListResponse']['HotelList']['HotelSummary']
+            end
 	  else
-		  ean_response = $api.get_list( :destinationString => params[:location_search] )
+            redirect_to root_path
 	  end
 
 # 	if ean_response.category
@@ -47,8 +67,8 @@ class Spree::HotelsController < Spree::StoreController
 #           puts "You just making it up!"
 #         end
 # 	else
-      	data = ean_response.body
-  	  	@hotel_list = data['HotelListResponse']['HotelList']['HotelSummary']
+      # 	data = ean_response.body
+  	  	# @hotel_list = data['HotelListResponse']['HotelList']['HotelSummary']
 # 	end
 
   end
@@ -61,16 +81,18 @@ class Spree::HotelsController < Spree::StoreController
     @room_types      = data['HotelInformationResponse']['RoomTypes']
     @hotel_images    = data['HotelInformationResponse']['HotelImages']['HotelImage']
 
-    @availability = []
-    @room_types['RoomType'].each do |rt|
+    # @availability = []
+    # @room_types['RoomType'].each do |rt|
 
       ean_availability = $api.get_availability( :hotelId => @hotel_summary['hotelId'],
-                                          :arrivaldate => '9/17/2014', :departuredate=> '9/19/2014',
-                                          :numberofadults => '2', :roomcodetype => rt['@roomCode'] )
+                                          :arrivalDate => '09-01-2014', :departureDate=> '09-04-2014',
+                                          :roomGroup => {:room => { :numberOfAdults => 2 }}
+                                          # , :roomCodeType => rt['@roomCode']
+                                          )
       data = ean_availability.body
-      @availability << data['HotelRoomAvailabilityResponse']['HotelRoomResponse']
+      @availability = data['HotelRoomAvailabilityResponse']['HotelRoomResponse']
 
-    end
+    # end
 
 
 

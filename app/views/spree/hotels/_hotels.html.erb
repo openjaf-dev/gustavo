@@ -23,7 +23,8 @@
     <% end %>
   </div>
   <div class="product-mini-description">
-    <%= raw(hotel['shortDescription']) %>
+    <%= hotel['shortDescription'].html_safe %>
+    <%= "<b>Property Location</b>".html_safe%>
   </div>
   <div id="cart-form" data-hook="cart_form">
     <%#= render :partial => 'cart_form', :locals => {:product => product} %>

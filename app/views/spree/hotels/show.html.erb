@@ -21,15 +21,21 @@ locationDescription</br>
 </br>
 </br>
 
-<% @availability.first.each do |r|%>
-
-<%= r['rateDescription'] %></br>
-<%#= r['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] %></br>
-          <div id="cart-form" data-hook="cart_form">
-            <%= render :partial => 'cart_form', :locals => { :r => r }%>
-          </div>
-
+<% if @availability.class == Array %>
+	<% @availability.each do |r|%>
+		<%= r['rateDescription'] %></br>
+		<div id="cart-form" data-hook="cart_form">
+		  <%= render :partial => 'cart_form', :locals => { :r => r }%>
+		</div>
+	<% end %>
+<% else %>
+		<%= @availability['rateDescription'] %></br>
+		<div id="cart-form" data-hook="cart_form">
+		  <%= render :partial => 'cart_form', :locals => { :r => @availability }%>
+		</div>
 <% end %>
+
+
 
 
 </br>
