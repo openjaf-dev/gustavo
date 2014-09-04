@@ -1,3 +1,6 @@
+<%= image_tag @hotel_images['HotelImage'].first['url'] %>
+
+
 Name</br>
 
 <%= @hotel_summary['name']%>
@@ -6,17 +9,8 @@ Name</br>
 </br>
 </br>
 
-          <div id="cart-form" data-hook="cart_form">
-            <%#= render :partial => 'cart_form' %>
-          </div>
-
-
-</br>
-</br>
-</br>
-
-locationDescription</br>
-<%= @hotel_detail['locationDescription']%>
+Description</br>
+<p><%= @hotel_detail['locationDescription']%></p>
 
 </br>
 </br>

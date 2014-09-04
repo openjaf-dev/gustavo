@@ -64,16 +64,12 @@ class Spree::HotelsController < Spree::StoreController
   	@hotel_summary   = data['HotelInformationResponse']['HotelSummary']
     @hotel_detail    = data['HotelInformationResponse']['HotelDetails']
     @room_types      = data['HotelInformationResponse']['RoomTypes']
-    @hotel_images    = data['HotelInformationResponse']['HotelImages']['HotelImage']
-
-    # @availability = []
-    # @room_types['RoomType'].each do |rt|
+    @hotel_images    = data['HotelInformationResponse']['HotelImages']
 
       ean_availability = $api.get_availability( :hotelId => @hotel_summary['hotelId'],
                                           :arrivalDate => params[:arrivalDate],
                                           :departureDate => params[:departureDate],
                                           :roomGroup => params[:roomGroup]
-                                          # , :roomCodeType => rt['@roomCode']
                                           )
       data = ean_availability.body
       @availability = data['HotelRoomAvailabilityResponse']['HotelRoomResponse']

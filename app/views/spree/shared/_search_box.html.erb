@@ -1,3 +1,7 @@
+<% content_for :head do %>
+        <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places" %>
+<% end %>
+
 <ul id="search_box_tabs" class="nav nav-tabs">
     <%= content_tag :li, class: "active" do %>
       <a data-toggle="tab" href=#hotel class="active"%> Hotel </a>
@@ -27,46 +31,3 @@
       </ul>
     </div>
 </div>
-
-<script>
-
-$(document).ready(function () {
-    $('#add').on("click", function () {
-          var newDiv=document.createElement('fieldset');
-           var html = '<legend>';
-           html += "room";
-
-           html += "</legend><label for='Adults'>Adults</label> \
-           <select name='roomGroup[][numberOfAdults]' id='roomGroup__numberOfAdults'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select> \
-           <label for='Children'>Children</label> \
-           <select name='roomGroup[][numberOfChildren]' id='roomGroup__numberOfChildren'><option value='0'>0</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select>";
-           newDiv.innerHTML= html;
-           document.getElementById('select-container').appendChild(newDiv);
-        return false;
-    });
-
-     $('#remove').on("click", function () {
-          var newDiv=document.createElement('fieldset');
-           var html = '<legend>';
-           html += "room";
-
-           newDiv.innerHTML= html;
-           document.getElementById('select-container').appendChild(newDiv);
-
-    return false;
-    });
-});
-
-// function addSelect(divname) {
-//    var newDiv=document.createElement('div');
-//    var html = '<select>', adults = 5 , i;
-//    for(i = 0; i < adults.length; i++) {
-//        html += "<option value='"+adults[i]+"'>"+adults[i]+"</option>";
-//    }
-//    html += '</select>';
-//    newDiv.innerHTML= html;
-//    document.getElementById('select-container').appendChild(newDiv);
-// }
-</script>
-
-  <%= render partial: "spree/shared/googlemap" %>
