@@ -25,3 +25,7 @@ en:
   spree:
     order_state:
       pax: Pax
+    room: Room
+    adults: Adults
+    children: Children
+    checkin: Checkin
