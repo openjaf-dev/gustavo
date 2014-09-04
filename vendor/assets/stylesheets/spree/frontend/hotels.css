@@ -83,3 +83,15 @@ span.stars-5{
     height: 16px;
     float: left;
 }
+
+#location_search{
+    margin-top: 15px;
+}
+
+#arrivalDate{
+    margin-top: 15px;
+}
+
+#departureDate{
+    margin-top: 15px;
+}

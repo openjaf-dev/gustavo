@@ -8,15 +8,65 @@
     <% prefix = "hotel_" %>
     <div id=<%="#{prefix}fields"%> class="tab-pane fade active in" >
       <ul class="alpha twelve columns omega" >
-		  <%= search_field_tag :location_search, params[:location_search], :class => "alpha eleven columns"%>
-		  <%= hidden_field_tag :location_lat %>
-		  <%= hidden_field_tag :location_lng%>
-		  <%= text_field_tag :arrivalDate, (Time.now).strftime("%m-%d-%Y"), :class => 'datepicker' %>
-		  <%= text_field_tag :departureDate, (Time.now + 3.days).strftime("%m-%d-%Y"), :class => 'datepicker'  %>
-		  <%= select_tag :rooms, options_for_select([["1", "1"], ["2", "2"], ["3", "3"]]) %>
+          <%= search_field_tag :location_search, params[:location_search], :class => "alpha twelve columns"%>
+          <%= hidden_field_tag :location_lat %>
+          <%= hidden_field_tag :location_lng%>
+          <%= label_tag Spree.t(:checkin)%>
+          <%= text_field_tag :arrivalDate, (Time.now).strftime("%m-%d-%Y"), :class => 'datepicker' %>
+          <%= label_tag Spree.t(:checkout)%>
+          <%= text_field_tag :departureDate, (Time.now + 3.days).strftime("%m-%d-%Y"), :class => 'datepicker'  %>
+		  <div id="select-container", class="alpha columns four omega">
+            <%= field_set_tag :room do %>
+                <%= label_tag Spree.t(:adults)%>
+                <%= select_tag "roomGroup[][numberOfAdults]", options_for_select([["1", "1"], ["2", "2"], ["3", "3"]]) %>
+                <%= label_tag Spree.t(:children)%>
+                <%= select_tag "roomGroup[][numberOfChildren]", options_for_select([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]) %>
+		  	<% end %>
+          <button id="add">Add Room</button>
+		  </div>
       </ul>
     </div>
 </div>
 
+<script>
+
+$(document).ready(function () {
+    $('#add').on("click", function () {
+          var newDiv=document.createElement('fieldset');
+           var html = '<legend>';
+           html += "room";
+
+           html += "</legend><label for='Adults'>Adults</label> \
+           <select name='roomGroup[][numberOfAdults]' id='roomGroup__numberOfAdults'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select> \
+           <label for='Children'>Children</label> \
+           <select name='roomGroup[][numberOfChildren]' id='roomGroup__numberOfChildren'><option value='0'>0</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select>";
+           newDiv.innerHTML= html;
+           document.getElementById('select-container').appendChild(newDiv);
+        return false;
+    });
+
+     $('#remove').on("click", function () {
+          var newDiv=document.createElement('fieldset');
+           var html = '<legend>';
+           html += "room";
+
+           newDiv.innerHTML= html;
+           document.getElementById('select-container').appendChild(newDiv);
+
+    return false;
+    });
+});
+
+// function addSelect(divname) {
+//    var newDiv=document.createElement('div');
+//    var html = '<select>', adults = 5 , i;
+//    for(i = 0; i < adults.length; i++) {
+//        html += "<option value='"+adults[i]+"'>"+adults[i]+"</option>";
+//    }
+//    html += '</select>';
+//    newDiv.innerHTML= html;
+//    document.getElementById('select-container').appendChild(newDiv);
+// }
+</script>
 
   <%= render partial: "spree/shared/googlemap" %>
