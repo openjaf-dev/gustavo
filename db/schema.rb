@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825181830) do
+ActiveRecord::Schema.define(version: 20140908143125) do
 
   create_table "spree_addresses", force: true do |t|
     t.string   "firstname"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20140825181830) do
   add_index "spree_configurations", ["name", "type"], name: "index_spree_configurations_on_name_and_type"
 
   create_table "spree_contexts", force: true do |t|
-    t.string   "context"
+    t.text     "context"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
