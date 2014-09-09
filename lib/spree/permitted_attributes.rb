@@ -14,11 +14,11 @@ module Spree
       :product_properties_attributes,
       :property_attributes,
       :return_authorization_attributes,
-      :shipment_attributes,
+      # :shipment_attributes,
       :source_attributes,
-      :stock_item_attributes,
-      :stock_location_attributes,
-      :stock_movement_attributes,
+      # :stock_item_attributes,
+      # :stock_location_attributes,
+      # :stock_movement_attributes,
       :store_attributes,
       :taxon_attributes,
       :taxonomy_attributes,
@@ -65,9 +65,9 @@ module Spree
 
     @@return_authorization_attributes = [:amount, :reason, :stock_location_id]
 
-    @@shipment_attributes = [
-      :order, :special_instructions, :stock_location_id, :id,
-      :tracking, :address, :inventory_units, :selected_shipping_rate_id]
+    # @@shipment_attributes = [
+    #   :order, :special_instructions, :stock_location_id, :id,
+    #   :tracking, :address, :inventory_units, :selected_shipping_rate_id]
 
     # month / year may be provided by some sources, or others may elect to use one field
     @@source_attributes = [
@@ -75,15 +75,15 @@ module Spree
       :first_name, :last_name, :cc_type, :gateway_customer_profile_id,
       :gateway_payment_profile_id, :last_digits, :name, :encrypted_data]
 
-    @@stock_item_attributes = [:variant, :stock_location, :backorderable, :variant_id]
+    # @@stock_item_attributes = [:variant, :stock_location, :backorderable, :variant_id]
 
-    @@stock_location_attributes = [
-      :name, :active, :address1, :address2, :city, :zipcode,
-      :backorderable_default, :state_name, :state_id, :country_id, :phone,
-      :propagate_all_variants]
+    # @@stock_location_attributes = [
+    #   :name, :active, :address1, :address2, :city, :zipcode,
+    #   :backorderable_default, :state_name, :state_id, :country_id, :phone,
+    #   :propagate_all_variants]
 
-    @@stock_movement_attributes = [
-      :quantity, :stock_item, :stock_item_id, :originator, :action]
+    # @@stock_movement_attributes = [
+    #   :quantity, :stock_item, :stock_item_id, :originator, :action]
 
     @@store_attributes = [:name, :url, :seo_title, :meta_keywords,
                          :meta_description, :default_currency]

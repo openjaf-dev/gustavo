@@ -29,3 +29,5 @@ en:
     adults: Adults
     children: Children
     checkin: Checkin
+    problem_booking: There was a problem making the booking
+    book: Book
