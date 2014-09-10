@@ -19,11 +19,10 @@ module Spree
     def update
 
       if !params[:order]
-        order_hash = {}
-        order_hash[:order] = { :line_items_attributes =>
-                              {"0"=>{:quantity => @order.line_items.first.quantity.to_s,
-                                      :id=>@order.line_items.first.id.to_s }}, :cupon_code=>""}
-        params.merge!(order_hash)
+       order_hash = {}
+       #TODO, this emial should come from somewhere
+       order_hash[:order] = {:email => "spree@example.com", :line_items_attributes => {"0"=>{:quantity => @order.line_items.first.quantity.to_s, :id=>@order.line_items.first.id.to_s }}, :cupon_code=>""}
+       params.merge!(order_hash)
       end
       if @order.contents.update_cart(order_params)
         respond_with(@order) do |format|

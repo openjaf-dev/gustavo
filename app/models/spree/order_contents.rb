@@ -25,7 +25,6 @@ module Spree
     end
 
     def update_cart(params)
-      asdasda
       if order.update_attributes(params)
         order.line_items = order.line_items.select {|li| li.quantity > 0 }
         # Update totals, then check if the order is eligible for any cart promotions.
@@ -33,7 +32,7 @@ module Spree
         # promotion rules would not be triggered.
         reload_totals
         PromotionHandler::Cart.new(order).activate
-        order.ensure_updated_shipments
+        # order.ensure_updated_shipments
         reload_totals
         true
       else
