@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910204359) do
+ActiveRecord::Schema.define(version: 20140911194408) do
 
   create_table "spree_addresses", force: true do |t|
     t.string   "firstname"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140910204359) do
     t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
   end
 
   add_index "spree_addresses", ["country_id"], name: "index_spree_addresses_on_country_id"
