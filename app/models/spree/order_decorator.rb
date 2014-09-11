@@ -5,7 +5,7 @@ module Spree
   	accepts_nested_attributes_for :pax_contacts
 
 
-  	insert_checkout_step :pax, :before => :address
+  	insert_checkout_step :pax, :before => :payment
     remove_checkout_step :delivery
 
   end
