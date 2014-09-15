@@ -19,15 +19,16 @@
           <%= text_field_tag :arrivalDate, (Time.now).strftime("%m-%d-%Y"), :class => 'datepicker' %>
           <%= label_tag Spree.t(:checkout)%>
           <%= text_field_tag :departureDate, (Time.now + 3.days).strftime("%m-%d-%Y"), :class => 'datepicker'  %>
-		  <div id="select-container", class="alpha columns four omega">
-            <%= field_set_tag :room do %>
-                <%= label_tag Spree.t(:adults)%>
-                <%= select_tag "roomGroup[][numberOfAdults]", options_for_select([["1", "1"], ["2", "2"], ["3", "3"]]) %>
-                <%= label_tag Spree.t(:children)%>
-                <%= select_tag "roomGroup[][numberOfChildren]", options_for_select([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]) %>
+		    <div id="select-container", class="alpha columns four omega">
+          <%= field_set_tag "Room 1" do %>
+            <%= label_tag Spree.t(:adults)%>
+            <%= select_tag "roomGroup[room1][numberOfAdults]", options_for_select([["1", "1"], ["2", "2"], ["3", "3"]]) %>
+            <%= label_tag Spree.t(:children)%>
+            <%= select_tag "roomGroup[room1][numberOfChildren]", options_for_select([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]) %>
 		  	<% end %>
-          <button id="add">Add Room</button>
-		  </div>
+		    </div>
+        <button id="add">Add Room</button>
+
       </ul>
     </div>
 </div>
