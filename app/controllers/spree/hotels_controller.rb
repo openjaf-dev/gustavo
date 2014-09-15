@@ -22,17 +22,27 @@ class Spree::HotelsController < Spree::StoreController
     #     },
     #   }
     # #
-    roomGroup = { }
+
+    # "roomGroup"=>{"room1"=>{"numberOfAdults"=>"[FILTERED]", "numberOfChildren"=>"[FILTERED]", "childAges"}}
+    # "roomGroup"=>{"room1"=>{"numberOfAdults"=>"[FILTERED]", "childAges" => "4,5,6"}}
+
     params[:roomGroup].each do |room|
-      roomGroup.merge!(room: room)
+        if room[:childAges]
+          params.merge!(room => "#{room[:numberOfAdults]}"+","+"#{room[:childAges]}")
+        else
+          params.merge!(room => "#{room[:numberOfAdults]}")
+        end
     end
+
+    # {:latitude=>"43.0481221", :longitude=>"-76.14742439999998",
+    # :arrivalDate=>"09-12-2014", :departureDate=>"09-15-2014",
+    # :room1=>"2,3"}
 
   	if (params[:location_lat] != "") && (params[:location_lng] != "")
 	  	      ean_response = $api.get_list( :latitude => params[:location_lat],
 	  								                :longitude => params[:location_lng],
                                     :arrivalDate => params[:arrivalDate],
-                                    :departureDate => params[:departureDate],
-                                    :roomGroup => roomGroup )
+                                    :departureDate => params[:departureDate] )
             if ean_response.class == Expedia::APIError
                 flash.notice = ean_response.presentation_message
                 redirect_to root_path
@@ -44,7 +54,7 @@ class Spree::HotelsController < Spree::StoreController
             ean_response = $api.get_list( :destinationString => params[:location_search],
                                     :arrivalDate => params[:arrivalDate],
                                     :departureDate => params[:departureDate],
-                                    :roomGroup => roomGroup )
+                                    :roomGroup => params[:roomGroup] )
             if ean_response.class == Expedia::APIError
                 flash.notice = ean_response.presentation_message
                 redirect_to root_path
@@ -71,10 +81,14 @@ class Spree::HotelsController < Spree::StoreController
                                           :departureDate => params[:departureDate],
                                           :roomGroup => params[:roomGroup]
                                           )
-      data = ean_availability.body
-      @availability = data['HotelRoomAvailabilityResponse']['HotelRoomResponse']
+      if ean_availability.class == Expedia::APIError
+          flash.notice = ean_availability.presentation_message
+          redirect_to :back
+      else
+        data = ean_availability.body
+        @availability = data['HotelRoomAvailabilityResponse']['HotelRoomResponse']
+      end
 
-    # end
 
   end
 
