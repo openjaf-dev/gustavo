@@ -1,4 +1,5 @@
 <% address_id = address_type.chars.first %>
+<%= Spree.t(:information_for_address)%>
 <div class="inner" data-hook=<%="#{address_type}_inner" %>>
   <p class="field" id=<%="#{address_id}email" %>>
     <%= form.label :email, Spree.t(:email) %><span class="required">*</span><br />

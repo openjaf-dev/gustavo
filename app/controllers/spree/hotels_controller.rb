@@ -26,13 +26,13 @@ class Spree::HotelsController < Spree::StoreController
     # "roomGroup"=>{"room1"=>{"numberOfAdults"=>"[FILTERED]", "numberOfChildren"=>"[FILTERED]", "childAges"}}
     # "roomGroup"=>{"room1"=>{"numberOfAdults"=>"[FILTERED]", "childAges" => "4,5,6"}}
 
-    params[:roomGroup].each do |room|
-        if room[:childAges]
-          params.merge!(room => "#{room[:numberOfAdults]}"+","+"#{room[:childAges]}")
-        else
-          params.merge!(room => "#{room[:numberOfAdults]}")
-        end
-    end
+    #params[:roomGroup].each do |room|
+    #    if room[:childAges]
+    #      params.merge!(room => "#{room[:numberOfAdults]}"+","+"#{room[:childAges]}")
+    #    else
+    #      params.merge!(room => "#{room[:numberOfAdults]}")
+    #    end
+    #end
 
     # {:latitude=>"43.0481221", :longitude=>"-76.14742439999998",
     # :arrivalDate=>"09-12-2014", :departureDate=>"09-15-2014",

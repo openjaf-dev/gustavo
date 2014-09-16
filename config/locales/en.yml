@@ -31,3 +31,5 @@ en:
     checkin: Checkin
     problem_booking: There was a problem making the booking
     book: Book
+    complete_reservation: Complete Reservation
+    information_for_address: Please provide the name for the guest responsible for checking into the room(s)

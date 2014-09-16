@@ -1,14 +1,3 @@
-
-  <%# number_pax = 0
-     dict = {}
-     @order.line_items.each do |li|
-       cant_pax = li.quantity
-       cant_pax.times { dict[number_pax += 1] = li.product.name }
-     end
-     number_pax = 1
-  %>
-
-
 <%= form.fields_for :pax_contacts do |pax| %>
   <div class="columns six  <%= cycle('', ' alpha omega') %>" data-hook="billing_fieldset_wrapper">
     <fieldset id="billing" data-hook>
@@ -24,9 +13,6 @@
     </fieldset>
   </div>
 <% end %>
-
-
-
 
 <div id="cart-sac-button" class="columns omega four" data-hook="buttons">
   <ul class="button-checkout-right padding-button-2">

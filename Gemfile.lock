@@ -11,9 +11,8 @@ GIT
       multi_json
       spree_core (~> 2.3.0)
 
-GIT
-  remote: git://github.com/zaidakram/expedia.git
-  revision: eaea41d4112624173fcdd080931790ef84f3e278
+PATH
+  remote: ../../github/expedia
   specs:
     expedia (0.0.3)
       faraday (~> 0.8)

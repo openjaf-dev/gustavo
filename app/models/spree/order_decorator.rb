@@ -6,6 +6,7 @@ module Spree
 
 
   	insert_checkout_step :pax, :before => :payment
+    insert_checkout_step :confirm, :before => :complete
     remove_checkout_step :delivery
 
   end
