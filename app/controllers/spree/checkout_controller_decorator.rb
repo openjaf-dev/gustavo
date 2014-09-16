@@ -6,13 +6,38 @@ module Spree
 
       if @order.update_from_params(params, permitted_checkout_attributes, request.headers.env)
         if @order.email == "spree@example.com"
-	  	  @order.email = params[:order][:bill_address_attributes][:email]
-	    end
+	  	    @order.email = params[:order][:bill_address_attributes][:email]
+	      end
         persist_user_address
+
+        if params[:commit] == "Complete Reservation"  && params[:state] == "confirm"
+          hash = eval(@order.context.context)
+          ean_response = $api.get_reservation( :hotelId => hash[:hotelId],
+                                               :arrivalDate => hash[:arrivalDate],
+                                               :departureDate => hash[:departureDate],
+                                               :rateKey => hash[:rateKey],
+                                               :roomTypeCode => hash[:roomTypeCode],
+                                               :rateCode => hash[:rateCode],
+                                               :chargeableRate => hash[:chargeableRate]
+
+          )
+          if ean_response.class == Expedia::APIError
+            flash.notice = ean_response.presentation_message
+            redirect_to root_path
+          else
+            data = ean_response.body
+            @hotel_list = data['HotelListResponse']['HotelList']['HotelSummary']
+          end
+        else
+
+        end
+
         unless @order.next
           flash[:error] = @order.errors.full_messages.join("\n")
           redirect_to checkout_state_path(@order.state) and return
         end
+
+
 
         if @order.completed?
           @current_order = nil
