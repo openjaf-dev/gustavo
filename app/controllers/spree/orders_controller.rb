@@ -52,7 +52,6 @@ module Spree
 
     # Adds a new item to the order (creating a new order if none already exists)
     def populate
-      Spree::Context.build_from_params(params)
       #TODO creo que aqui debo pedir información maś precisa, no pedirla toda
       a = $api.get_information( :hotelId => params[:hotelId] )
       data = a.body
@@ -63,6 +62,11 @@ module Spree
 
 
       populator = Spree::OrderPopulator.new(current_order(create_order_if_necessary: true), current_currency)
+
+      a = Spree::Context.build_from_params(params)
+      a.order_id =  current_order.id
+      a.save
+
       if populator.populate(product.master.id, params[:quantity])
         # current_order.ensure_updated_shipments
         # respond_with(@order) do |format|
