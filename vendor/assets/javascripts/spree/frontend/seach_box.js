@@ -29,14 +29,16 @@ $(document).ready(function () {
     });
 
     $("#roomGroup_room1_numberOfChildren").change(function() {
-        var newDiv=document.createElement('div');
-        var html = "<label for='Adults'>Age of each Children</label>"
-        for(var i = 1; i <= $('#roomGroup_room1_numberOfChildren :selected').val(); i++) {
-            html += "<select name='roomGroup[room1][age"+count+"]' id='test'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select>"
-        }
-        newDiv.innerHTML= html;
-        document.getElementById('room1').appendChild(newDiv)
+        if ($('#roomGroup_room1_numberOfChildren :selected').val() != 0) {
 
+            var newDiv=document.createElement('div');
+            var html = "<label for='Adults'>Age of each Children</label>"
+            for(var i = 1; i <= $('#roomGroup_room1_numberOfChildren :selected').val(); i++) {
+                html += "<select name='roomGroup[room1][age"+i+"]' id='test'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select>"
+            }
+            newDiv.innerHTML= html;
+            document.getElementById('room1').appendChild(newDiv)
+        }
     });
 
     $('#my_select').change(function() {
