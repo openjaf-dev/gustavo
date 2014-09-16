@@ -23,16 +23,21 @@ class Spree::HotelsController < Spree::StoreController
     #   }
     # #
 
-    # "roomGroup"=>{"room1"=>{"numberOfAdults"=>"[FILTERED]", "numberOfChildren"=>"[FILTERED]", "childAges"}}
-    # "roomGroup"=>{"room1"=>{"numberOfAdults"=>"[FILTERED]", "childAges" => "4,5,6"}}
+    #roomGroup"=>{"room1"=>{"numberOfAdults"=>"2", "numberOfChildren"=>"2", "age1"=>"2", "age2"=>"3"}}
 
-    #params[:roomGroup].each do |room|
-    #    if room[:childAges]
-    #      params.merge!(room => "#{room[:numberOfAdults]}"+","+"#{room[:childAges]}")
-    #    else
-    #      params.merge!(room => "#{room[:numberOfAdults]}")
-    #    end
-    #end
+    params[:roomGroup].each do |key, value|
+        ages = ""
+        if value[:numberOfChildren].to_i > 0
+          for i in 1..value[:numberOfChildren].to_i
+            ages += value["age#{i}"]
+            ages += "," if i != value[:numberOfChildren].to_i
+
+          end
+          params.merge!(key => "#{value[:numberOfAdults]}"+","+ages)
+        else
+          params.merge!(key => value[:numberOfAdults])
+        end
+    end
 
     # {:latitude=>"43.0481221", :longitude=>"-76.14742439999998",
     # :arrivalDate=>"09-12-2014", :departureDate=>"09-15-2014",
@@ -42,7 +47,8 @@ class Spree::HotelsController < Spree::StoreController
 	  	      ean_response = $api.get_list( :latitude => params[:location_lat],
 	  								                :longitude => params[:location_lng],
                                     :arrivalDate => params[:arrivalDate],
-                                    :departureDate => params[:departureDate] )
+                                    :departureDate => params[:departureDate],
+                                    :room1 => params[:room1])
             if ean_response.class == Expedia::APIError
                 flash.notice = ean_response.presentation_message
                 redirect_to root_path

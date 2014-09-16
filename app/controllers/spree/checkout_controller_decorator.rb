@@ -25,8 +25,8 @@ module Spree
             flash.notice = ean_response.presentation_message
             redirect_to root_path
           else
-            data = ean_response.body
-            @hotel_list = data['HotelListResponse']['HotelList']['HotelSummary']
+            #data = ean_response.body
+            #@hotel_list = data['HotelListResponse']['HotelList']['HotelSummary']
           end
         else
 
