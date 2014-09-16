@@ -42,7 +42,9 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'expedia', :path => '../../github/expedia'
+#gem 'expedia', :path => '../../github/expedia'
+gem 'expedia', :github => 'zaidakram/expedia'
+
 gem 'therubyracer'
 
 group :development do
