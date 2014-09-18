@@ -10,6 +10,11 @@
         <%= hidden_field_tag "rateCode",  r['rateCode'] %>
         <%= hidden_field_tag "chargeableRate", r['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] %>
         <%= hidden_field_tag "numberOfAdults", r['rateOccupancyPerRoom'] %>
+        <%= hidden_field_tag "numberOfAdults", r['rateOccupancyPerRoom'] %>
+        <% @array.each do |room| %>
+            <%= hidden_field_tag room, params[room] %>
+        <% end %>
+
         <!-- TODO, we should put a choice list for the different bed types -->
         <%#= hidden_field_tag "bedTypeId", r['BedTypes']['BedType'].first['@id'] %>
 
