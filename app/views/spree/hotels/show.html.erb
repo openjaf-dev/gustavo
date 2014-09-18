@@ -6,8 +6,6 @@ Name</br>
 <%= @hotel_summary['name']%>
 
 </br>
-</br>
-</br>
 
 Description</br>
 <p><%= @hotel_detail['locationDescription']%></p>
@@ -17,7 +15,11 @@ Description</br>
 
 <% if @availability.class == Array %>
 	<% @availability.each do |r|%>
-		<%= r['rateDescription'] %></br>
+        <h3><%= r['rateDescription'] %></h3></br>
+        <h4><%= r['BedTypes']['BedType']['description']%></h4>  </br>
+        <% r['ValueAdds']['ValueAdd'].each do |add| %>
+          <%= add["description"] %> </br>
+        <% end %>
 		<div id="cart-form" data-hook="cart_form">
 		  <%= render :partial => 'cart_form', :locals => { :r => r }%>
 		</div>
@@ -28,8 +30,6 @@ Description</br>
 		  <%= render :partial => 'cart_form', :locals => { :r => @availability }%>
 		</div>
 <% end %>
-
-
 
 
 </br>
