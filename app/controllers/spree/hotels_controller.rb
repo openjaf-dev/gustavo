@@ -18,6 +18,7 @@ class Spree::HotelsController < Spree::StoreController
           #params.merge!(key => value[:numberOfAdults])
           params.merge!(key => "1,3,5")
           params.merge!(:room2 => "2")
+          params.merge!(:room3 => "3")
         end
     end
 
@@ -30,7 +31,7 @@ class Spree::HotelsController < Spree::StoreController
 	  								                :longitude => params[:location_lng],
                                     :arrivalDate => params[:arrivalDate],
                                     :departureDate => params[:departureDate],
-                                    :room1 => '1,3,5', :room2=>'2')
+                                    :room1 => '1,3,5', :room2=>'2', :room3 => '3')
 
             if ean_response.class == Expedia::APIError
                 flash.notice = ean_response.presentation_message
@@ -43,7 +44,7 @@ class Spree::HotelsController < Spree::StoreController
             ean_response = $api.get_list( :destinationString => params[:location_search],
                                     :arrivalDate => params[:arrivalDate],
                                     :departureDate => params[:departureDate],
-                                    :room1 => '1,3,5', :room2=>'2')
+                                    :room1 => '1,3,5', :room2=>'2', :room3 => '3')
 
             if ean_response.class == Expedia::APIError
                 flash.notice = ean_response.presentation_message
@@ -71,7 +72,7 @@ class Spree::HotelsController < Spree::StoreController
                                           :departureDate => params[:departureDate],
                                           :includeDetails=> true,
                                           :includeRoomImages=>true,
-                                          :room1 => '1,3,5', :room2=>'2'
+                                          :room1 => '1,3,5', :room2=>'2', :room3 => '3'
                                           )
     @array = []
     params.each do |key, value|

@@ -17,7 +17,7 @@
     <%= image_tag show_image(hotel['thumbNailUrl']), :itemprop => 'image' %>
   </div>
   <div class="product-title">
-    <%= link_to "/hotels/#{hotel['hotelId']}?arrivalDate=#{params[:arrivalDate]}&departureDate=#{params[:departureDate]}&room1=#{params[:room1]}&room2=#{params[:room2]}",  :class => 'info', :itemprop => "name", :title => hotel['name'] do %>
+    <%= link_to "/hotels/#{hotel['hotelId']}?arrivalDate=#{params[:arrivalDate]}&departureDate=#{params[:departureDate]}&room1=#{params[:room1]}&room2=#{params[:room2]}&room3=#{params[:room3]}",  :class => 'info', :itemprop => "name", :title => hotel['name'] do %>
       <%= hotel['name'] %>
       <span class=<%= "stars-" + hotel['hotelRating'].to_s %> ></span>
     <% end %>
