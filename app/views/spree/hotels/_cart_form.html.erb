@@ -5,7 +5,7 @@
         <%= hidden_field_tag "hotelId", @hotel_summary['hotelId']  %>
         <%= hidden_field_tag "arrivalDate", params[:arrivalDate]  %>
         <%= hidden_field_tag "departureDate",  params[:departureDate] %>
-        <%= hidden_field_tag "rateKey", r['RateInfos']['RateInfo']['RoomGroup']['Room']['rateKey']  %>
+        <%= hidden_field_tag "rateKey", r['RateInfos']['RateInfo']['RoomGroup']['Room'].first['rateKey']  %>
         <%= hidden_field_tag "roomTypeCode", r['roomTypeCode']  %>
         <%= hidden_field_tag "rateCode",  r['rateCode'] %>
         <%= hidden_field_tag "chargeableRate", r['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] %>
@@ -19,8 +19,14 @@
         <div id="product-price">
           <h6 class="product-section-title"><%= Spree.t(:price) %></h6>
           <div>
+            <% averageBaseRate=  r['RateInfos']['RateInfo']['ChargeableRateInfo']['@averageBaseRate'].to_f.ceil  %>
+            <% averageRate = r['RateInfos']['RateInfo']['ChargeableRateInfo']['@averageRate'].to_f.ceil %>
+            <% if averageBaseRate > averageRate %>
+                Before: <%= averageBaseRate %>,
+                <%= r['RateInfos']['RateInfo']['promoDescription'] %>  </br >
+            <%end%>
             <span class="price selling" itemprop="price">
-              <%= r['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] %>
+              <%= averageRate %>
             </span>
             <span itemprop="priceCurrency" content="<%= r['RateInfos']['RateInfo']['ChargeableRateInfo']['@currencyCode'] %>"></span>
           </div>
