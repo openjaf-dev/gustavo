@@ -11,12 +11,12 @@
         <%= hidden_field_tag "chargeableRate", r['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] %>
         <%= hidden_field_tag "numberOfAdults", r['rateOccupancyPerRoom'] %>
         <%= hidden_field_tag "numberOfAdults", r['rateOccupancyPerRoom'] %>
-        <% @array.each do |room| %>
+        <% @rooms.each do |room| %>
             <%= hidden_field_tag room, params[room] %>
         <% end %>
 
-        <!-- TODO, we should put a choice list for the different bed types -->
-        <%#= hidden_field_tag "bedTypeId", r['BedTypes']['BedType'].first['@id'] %>
+        <!-- TODO, we should put a choice list for the different bed types if the user would like to select them -->
+        <%= hidden_field_tag "bedTypeId", r['BedTypes']['BedType']['@id'] %>
 
     <%# if @product.price_in(current_currency) and !@prodct.price.nil? %>
       <div data-hook="product_price" class="columns five">

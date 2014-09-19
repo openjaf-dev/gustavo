@@ -3,30 +3,31 @@ var count = 2;
 $(document).ready(function () {
 
     $('#add').on("click", function () {
-          var newFieldset=document.createElement('fieldset');
-          var html = '<legend>';
-          html += "Room "+count ;
+        var newFieldset=document.createElement('fieldset');
+        newFieldset.id = "#room"+count+""
+        var html = '<legend>';
+        html += "Room "+count ;
 
-          html += "</legend><label for='Adults'>Adults</label> \
-          <select name='roomGroup[room"+count+"][numberOfAdults]' id='roomGroup_room"+count+"_numberOfAdults'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select> \
-          <label for='Children'>Children</label> \
-          <select name='roomGroup[room"+count+"][numberOfChildren]' id='roomGroup_room"+count+"_numberOfChildren'><option value='0'>0</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select>";
-          newFieldset.innerHTML= html;
-          document.getElementById('select-container').appendChild(newFieldset);
-          count++;
+        html += "</legend><label for='Adults'>Adults</label> \
+        <select name='roomGroup[room"+count+"][numberOfAdults]' id='roomGroup_room"+count+"_numberOfAdults'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select> \
+        <label for='Children'>Children</label> \
+        <select name='roomGroup[room"+count+"][numberOfChildren]' id='roomGroup_room"+count+"_numberOfChildren'><option value='0'>0</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select>\
+        <a href='#' id='remove"+count+"'>X</a>        ";
+        newFieldset.innerHTML= html;
+        document.getElementById('select-container').appendChild(newFieldset);
+        count++;
       return false;
     });
 
-    $('#remove').on("click", function () {
-          var newDiv=document.createElement('fieldset');
-          var html = '<legend>';
-          html += "room";
-
-          newDiv.innerHTML= html;
-          document.getElementById('select-container').appendChild(newDiv);
-          count--;
-      return false;
-    });
+//    $("#remove"+count--+"").on("click", function () {
+//        $("#room"+count--+"").remove();
+//        count--;
+//      return false;
+//    });
+//    a todos los select que esten dentro de un fildset
+//    combo1.chan
+//
+//    todos los combos se suscriben a la misma funcion.
 
     $("#roomGroup_room1_numberOfChildren").change(function() {
         if ($('#roomGroup_room1_numberOfChildren :selected').val() != 0) {
@@ -41,11 +42,6 @@ $(document).ready(function () {
         }
     });
 
-    $('#my_select').change(function() {
-        	   // assign the value to a variable, so you can test to see if it is working
-        	    var selectVal = $('#my_select :selected').val();
-        	    alert(selectVal);
-        	});
 
     var input = document.getElementById('location_search');
     var autocomplete = new google.maps.places.Autocomplete(input);
