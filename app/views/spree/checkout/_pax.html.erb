@@ -1,7 +1,7 @@
 <%= form.fields_for :pax_contacts do |pax| %>
-  <div class="columns six  <%= cycle('', ' alpha omega') %>" data-hook="billing_fieldset_wrapper">
+  <div class="columns six  <%=sdfsf cycle('', ' alpha omega') %>" data-hook="billing_fieldset_wrapper">
     <fieldset id="billing" data-hook>
-      <legend align="left"><%= Spree.t(:room) %></legend>
+      <legend align="left"><%= Spree.t(:room) %> <%= pax.object_name[-2].to_i + 1 %></legend>
       <p class="columns alpha four field" id="bfirstname">
         <%= pax.label :first_name, t('first_name') %><span class="req">*</span><br />
         <%= pax.text_field :first_name, :class => 'required' %>

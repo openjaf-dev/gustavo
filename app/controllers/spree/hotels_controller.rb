@@ -74,10 +74,10 @@ class Spree::HotelsController < Spree::StoreController
                                           :includeRoomImages=>true,
                                           :room1 => '1,3,5', :room2=>'2', :room3 => '3'
                                           )
-    @array = []
+    @rooms = []
     params.each do |key, value|
       if  key == key.scan(/room[0-9]*$/).first
-         @array<<key
+         @rooms<<key
       end
     end
 
