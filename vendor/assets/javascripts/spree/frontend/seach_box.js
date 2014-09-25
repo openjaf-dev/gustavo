@@ -4,17 +4,18 @@ $(document).ready(function () {
 
     $('#add').on("click", function () {
         var newFieldset=document.createElement('fieldset');
-        newFieldset.id = "#room"+count+""
+        newFieldset.id = "room"+count+""
         var html = '<legend>';
         html += "Room "+count ;
 
         html += "</legend><label for='Adults'>Adults</label> \
         <select name='roomGroup[room"+count+"][numberOfAdults]' id='roomGroup_room"+count+"_numberOfAdults'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select> \
         <label for='Children'>Children</label> \
-        <select name='roomGroup[room"+count+"][numberOfChildren]' id='roomGroup_room"+count+"_numberOfChildren'><option value='0'>0</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select>\
+        <select name='roomGroup[room"+count+"][numberOfChildren]' id='children_"+count+"' class='children_select'><option value='0'>0</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select>\
         <a href='#' id='remove"+count+"'>X</a>        ";
         newFieldset.innerHTML= html;
         document.getElementById('select-container').appendChild(newFieldset);
+        $("#children_" + count).change(children_changed);
         count++;
       return false;
     });
@@ -29,18 +30,27 @@ $(document).ready(function () {
 //
 //    todos los combos se suscriben a la misma funcion.
 
-    $("#roomGroup_room1_numberOfChildren").change(function() {
-        if ($('#roomGroup_room1_numberOfChildren :selected').val() != 0) {
-
+    function children_changed(event) {
+        console.log(event);
+        var parts = event.target.id.split("_");
+        var number = parts[parts.length - 1];
+        var new_div_id = "room_" + number + "_children";
+        $("#" + new_div_id).remove();
+        var number_selected = $("#" + event.target.id + ' :selected').val();
+        if (number_selected != 0) {
+            console.log("here");
             var newDiv=document.createElement('div');
+            newDiv.id = new_div_id;
             var html = "<label for='Adults'>Age of each Children</label>"
-            for(var i = 1; i <= $('#roomGroup_room1_numberOfChildren :selected').val(); i++) {
-                html += "<select name='roomGroup[room1][age"+i+"]' id='test'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select>"
+            for(var i = 1; i <= number_selected; i++) {
+                html += "<select name='roomGroup[room" + number + "][age"+i+"]' id='test'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select>"
             }
             newDiv.innerHTML= html;
-            document.getElementById('room1').appendChild(newDiv)
+            document.getElementById('room'+number).appendChild(newDiv);
         }
-    });
+    }
+
+    $(".children_select").change(children_changed);
 
 
     var input = document.getElementById('location_search');

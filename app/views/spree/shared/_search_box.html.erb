@@ -24,7 +24,7 @@
             <%= label_tag Spree.t(:adults)%>
             <%= select_tag "roomGroup[room1][numberOfAdults]", options_for_select([["1", "1"], ["2", "2"], ["3", "3"]]) %>
             <%= label_tag Spree.t(:children)%>
-            <%= select_tag "roomGroup[room1][numberOfChildren]", options_for_select([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]) %>
+            <%= select_tag "roomGroup[room1][numberOfChildren]", options_for_select([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]), :class => 'children_select', :id => "children_1" %>
           <% end %>
         </div>
         <button id="add">Add Room</button>
