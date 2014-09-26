@@ -20,7 +20,7 @@
           <%= label_tag Spree.t(:checkout)%>
           <%= text_field_tag :departureDate, (Time.now + 3.days).strftime("%m-%d-%Y"), :class => 'datepicker'  %>
         <div id="select-container" class="alpha columns five omega">
-          <%= field_set_tag "Room 1", :id => :room1 do %>
+          <%= field_set_tag "Room 1", :id => :room_1 do %>
             <%= label_tag Spree.t(:adults)%>
             <%= select_tag "roomGroup[room1][numberOfAdults]", options_for_select([["1", "1"], ["2", "2"], ["3", "3"]]) %>
             <%= label_tag Spree.t(:children)%>

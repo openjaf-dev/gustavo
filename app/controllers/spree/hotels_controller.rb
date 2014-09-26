@@ -5,6 +5,12 @@ class Spree::HotelsController < Spree::StoreController
 
    #roomGroup"=>{"room1"=>{"numberOfAdults"=>"2", "numberOfChildren"=>"2", "age1"=>"2", "age2"=>"3"}}
 
+    #TODO hay que cambiar que cuando se elimine un room,
+    # los que est'an debajo se corran hacia arriba con el n'umero de la
+    #habitaci'on consecutivamente
+    #TODO en vez de cojer @key , value@ hacerlo con 'each with index'
+    #TODO meter este codiguito en un m'etodo que sea API.ean_to_params
+    ean_params= {}
     params[:roomGroup].each do |key, value|
         ages = ""
         if value[:numberOfChildren].to_i > 0
@@ -14,11 +20,13 @@ class Spree::HotelsController < Spree::StoreController
 
           end
           params.merge!(key => "#{value[:numberOfAdults]}"+","+ages)
+          ean_params[key] = "#{value[:numberOfAdults]}"+","+ages
         else
-          #params.merge!(key => value[:numberOfAdults])
-          params.merge!(key => "1,3,5")
-          params.merge!(:room2 => "2")
-          params.merge!(:room3 => "3")
+          params.merge!(key => value[:numberOfAdults])
+          ean_params[key] = value[:numberOfAdults]
+          #params.merge!(key => "1,3,5")
+          #params.merge!(:room2 => "2")
+          #params.merge!(:room3 => "3")
         end
     end
 
@@ -26,20 +34,23 @@ class Spree::HotelsController < Spree::StoreController
     # :arrivalDate=>"09-12-2014", :departureDate=>"09-15-2014",
     # :room1=>"2,3"}
 
+    # TODO: el metodito API.params_to_ean devuelve ean_params
   	if (params[:location_lat] != "") && (params[:location_lng] != "")
-	  	      ean_response = $api.get_list( :latitude => params[:location_lat],
-	  								                :longitude => params[:location_lng],
-                                    :arrivalDate => params[:arrivalDate],
-                                    :departureDate => params[:departureDate],
-                                    :room1 => '1,3,5', :room2=>'2', :room3 => '3')
+      ean_params[:latitude] = params[:location_lat]
+      ean_params[:longitude] = params[:location_lng]
+      ean_params[:arrivalDate] = params[:arrivalDate]
+      ean_params[:departureDate ] = params[:departureDate]
 
-            if ean_response.class == Expedia::APIError
-                flash.notice = ean_response.presentation_message
-                redirect_to root_path
-            else
-              data = ean_response.body
-              @hotel_list = data['HotelListResponse']['HotelList']['HotelSummary']
-            end
+      ean_response = $api.get_list( ean_params)
+
+      if ean_response.class == Expedia::APIError
+          flash.notice = ean_response.presentation_message
+          redirect_to root_path
+      else
+        data = ean_response.body
+        @hotel_list = data['HotelListResponse']['HotelList']['HotelSummary']
+      end
+
     elsif (params[:location_lat] == "") && (params[:location_lng] == "")
             ean_response = $api.get_list( :destinationString => params[:location_search],
                                     :arrivalDate => params[:arrivalDate],
