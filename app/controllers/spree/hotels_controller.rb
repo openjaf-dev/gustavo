@@ -10,7 +10,13 @@ class Spree::HotelsController < Spree::StoreController
           redirect_to root_path
       else
         data = ean_response.body
-        @hotel_list = data['HotelListResponse']['HotelList']['HotelSummary']
+        hotel_list = data['HotelListResponse']['HotelList']['HotelSummary']
+        if hotel_list.class == Hash
+          @hotels = []
+          @hotels << hotel_list
+        else
+          @hotels = hotel_list
+        end
       end
 
   end
