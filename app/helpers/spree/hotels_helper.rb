@@ -5,7 +5,7 @@ module Spree::HotelsHelper
     if params
       link += "?"
       params.each do |key, value|
-        link += "#{key}=#{value}&"
+        link += "#{key}=#{value}"
       end
     end
     link
