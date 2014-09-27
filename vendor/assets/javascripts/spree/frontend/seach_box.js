@@ -6,7 +6,7 @@ $(document).ready(function () {
         var newFieldset=document.createElement('fieldset');
         newFieldset.id = "room_"+count;
         var html = '<legend>';
-        html += "Room "+count ;
+        html += "Room ";
 
         html += "</legend><label for='Adults'>Adults</label> \
         <select name='roomGroup[room"+count+"][numberOfAdults]' id='roomGroup_room"+count+"_numberOfAdults'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option></select> \
