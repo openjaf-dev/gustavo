@@ -29,13 +29,21 @@ class Spree::HotelsController < Spree::StoreController
     @room_types      = data['HotelInformationResponse']['RoomTypes']
     @hotel_images    = data['HotelInformationResponse']['HotelImages']
 
-      ean_availability = $api.get_availability( :hotelId => @hotel_summary['hotelId'],
-                                          :arrivalDate => params[:arrivalDate],
-                                          :departureDate => params[:departureDate],
-                                          :includeDetails=> true,
-                                          :includeRoomImages=>true,
-                                          :room1 => '1,3,5', :room2=>'2', :room3 => '3'
-                                          )
+    #TODO esto hya que moverlo tambien para la calse EAN
+    a = {}
+    a[:hotelId] = @hotel_summary['hotelId']
+    a[:arrivalDate] = params[:arrivalDate]
+    a[:departureDate] = params[:departureDate]
+    a[:includeDetails] = true
+    a[:includeRoomImages] = true
+
+    params.each do |key, value|
+      if  key == key.scan(/room[0-9]*$/).first
+        a[key]= value
+      end
+    end
+
+    ean_availability = $api.get_availability( a )
     @rooms = []
     params.each do |key, value|
       if  key == key.scan(/room[0-9]*$/).first

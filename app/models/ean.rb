@@ -17,6 +17,7 @@ class Ean
         hash["room"+(i+1).to_s] = room[1][:numberOfAdults]
       end
     end
+    hash
   end
 
   def self.ean_to_params
