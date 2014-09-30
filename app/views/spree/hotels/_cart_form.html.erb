@@ -5,7 +5,11 @@
         <%= hidden_field_tag "hotelId", @hotel_summary['hotelId']  %>
         <%= hidden_field_tag "arrivalDate", params[:arrivalDate]  %>
         <%= hidden_field_tag "departureDate",  params[:departureDate] %>
-        <%= hidden_field_tag "rateKey", r['RateInfos']['RateInfo']['RoomGroup']['Room'].first['rateKey']  %>
+        <%if r['RateInfos']['RateInfo']['RoomGroup']['Room'].class == Hash%>
+            <%= hidden_field_tag "rateKey", r['RateInfos']['RateInfo']['RoomGroup']['Room']['rateKey']  %>
+        <%else%>
+            <%= hidden_field_tag "rateKey", r['RateInfos']['RateInfo']['RoomGroup']['Room'].first['rateKey'] %>
+        <%end%>
         <%= hidden_field_tag "roomTypeCode", r['roomTypeCode']  %>
         <%= hidden_field_tag "rateCode",  r['rateCode'] %>
         <%= hidden_field_tag "chargeableRate", r['RateInfos']['RateInfo']['ChargeableRateInfo']['@total'] %>
