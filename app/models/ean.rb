@@ -53,7 +53,7 @@ class Ean
 
   def self.build_avaliability_params(params)
     hash = {}
-    hash[:hotelId] = @hotel_summary['hotelId']
+    hash[:hotelId] = params[:id]
     hash[:arrivalDate] = params[:arrivalDate]
     hash[:departureDate] = params[:departureDate]
     hash[:includeDetails] = true
