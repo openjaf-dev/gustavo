@@ -51,4 +51,20 @@ class Ean
 
   end
 
+  def self.build_avaliability_params(params)
+    hash = {}
+    hash[:hotelId] = @hotel_summary['hotelId']
+    hash[:arrivalDate] = params[:arrivalDate]
+    hash[:departureDate] = params[:departureDate]
+    hash[:includeDetails] = true
+    hash[:includeRoomImages] = true
+
+    params.each do |key, value|
+      if  key == key.scan(/room[0-9]*$/).first
+        hash[key]= value
+      end
+    end
+    hash
+  end
+
 end

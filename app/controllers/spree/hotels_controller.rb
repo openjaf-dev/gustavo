@@ -29,28 +29,14 @@ class Spree::HotelsController < Spree::StoreController
     @room_types      = data['HotelInformationResponse']['RoomTypes']
     @hotel_images    = data['HotelInformationResponse']['HotelImages']
 
-    #TODO esto hya que moverlo tambien para la calse EAN
-    a = {}
-    a[:hotelId] = @hotel_summary['hotelId']
-    a[:arrivalDate] = params[:arrivalDate]
-    a[:departureDate] = params[:departureDate]
-    a[:includeDetails] = true
-    a[:includeRoomImages] = true
-
-    params.each do |key, value|
-      if  key == key.scan(/room[0-9]*$/).first
-        a[key]= value
-      end
-    end
-
-    ean_availability = $api.get_availability( a )
     @rooms = []
     params.each do |key, value|
       if  key == key.scan(/room[0-9]*$/).first
-         @rooms<<key
+        @rooms<<key
       end
     end
 
+    ean_availability = $api.get_availability( Ean.build_avaliability_params(params) )
 
     if ean_availability.class == Expedia::APIError
         flash.notice = ean_availability.presentation_message
