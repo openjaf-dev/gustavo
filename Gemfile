@@ -45,6 +45,9 @@ gem 'spring',        group: :development
 #gem 'expedia', :path => '../../github/expedia'
 gem 'expedia', :github => 'zaidakram/expedia'
 
+#gem 'figaro', :github =>
+gem 'figaro', :path => '../../github/figaro'
+
 gem 'therubyracer'
 
 group :development do
