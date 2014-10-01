@@ -16,7 +16,6 @@
       </div>
       <div class="product-title">
         <%= link_to hotels_path(hotel['hotelId'], params),  :class => 'info', :itemprop => "name", :title => hotel['name'] do %>
-        <%#= link_to "/hotels/#{hotel['hotelId']}?arrivalDate=#{params[:arrivalDate]}&departureDate=#{params[:departureDate]}&room1=#{params[:room1]}&room2=#{params[:room2]}&room3=#{params[:room3]}",  :class => 'info', :itemprop => "name", :title => hotel['name'] do %>
           <%= hotel['name'] %>
           <span class=<%= "stars-" + hotel['hotelRating'].to_s %> ></span>
         <% end %>
@@ -29,15 +28,6 @@
         <%#= render :partial => 'cart_form', :locals => {:product => product} %>
       </div>
     </li>
-    <!-- <li id="product_#{hotel['hotelId']}" class="columns twelve secundary alpha omega" data-hook="products_list_item" itemscope itemtype="http://schema.org/Product"> -->
-        <!-- <div class="product-image"> -->
-          <%#= image_tag show_image(hotel['thumbNailUrl']), :itemprop => "image" %>
-        <!-- </div> -->
-        <%#=  link_to hotel['name'], "/hotels/#{hotel['hotelId']}", :class => 'info', :itemprop => "name", :title => hotel['name'] %>
-        <%#= hotel['countryCode'] %>
-        <!-- <span class="price selling" itemprop="price"><%#= display_price(hotel) %></span> -->
-      <%# end %>
-    <!-- </li> -->
   <% end %>
 
     </ul>

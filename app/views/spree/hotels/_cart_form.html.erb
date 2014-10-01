@@ -5,6 +5,7 @@
         <%= hidden_field_tag "hotelId", @hotel_summary['hotelId']  %>
         <%= hidden_field_tag "arrivalDate", params[:arrivalDate]  %>
         <%= hidden_field_tag "departureDate",  params[:departureDate] %>
+        #TOOO ver esto con peter a ver si hay alguna mejor manera
         <%if r['RateInfos']['RateInfo']['RoomGroup']['Room'].class == Hash%>
             <%= hidden_field_tag "rateKey", r['RateInfos']['RateInfo']['RoomGroup']['Room']['rateKey']  %>
         <%else%>
