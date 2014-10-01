@@ -43,4 +43,3 @@ public/spree/
 
 # Ignore application configuration
 /config/application.yml
-config/initializers/expedia.rb
