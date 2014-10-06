@@ -17,8 +17,12 @@ Description</br>
 	<% @availability.each do |r|%>
         <h3><%= r['rateDescription'] %></h3></br>
         <h4><%= r['BedTypes']['BedType']['description']%></h4>  </br>
-        <% r['ValueAdds']['ValueAdd'].each do |add| %>
-          <%= add["description"] %> </br>
+        <% if r['ValueAdds']['ValueAdd'].class == Hash %>
+            <% r['ValueAdds']['ValueAdd']['description'] %>
+        <%else%>
+            <% r['ValueAdds']['ValueAdd'].each do |add| %>
+              <%= add["description"] %> </br>
+            <% end %>
         <% end %>
 		<div id="cart-form" data-hook="cart_form">
 		  <%= render :partial => 'cart_form', :locals => { :r => r }%>
